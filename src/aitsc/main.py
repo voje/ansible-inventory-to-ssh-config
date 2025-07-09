@@ -38,7 +38,7 @@ def parse_ssh_common_args(sca):
         if len(a) == 0:
             continue
         pair = a.split("=")
-        dargs[pair[0]] = pair[1]
+        dargs[pair[0]] = pair[1].replace("\"", "")
     return dargs
 
 def update_ssh_config(ssh_config_file, inventories, variables, group='all'):
@@ -56,10 +56,10 @@ def update_ssh_config(ssh_config_file, inventories, variables, group='all'):
         ssh_vars.update({'Hostname': hostname})
         if port != 22:
             ssh_vars.update({'Port': port})
-        if user:
-            ssh_vars.update({'User': user})
-        if identityfile:
-            ssh_vars.update({'IdentityFile': identityfile})
+        # if user:
+        #     ssh_vars.update({'User': user})
+        # if identityfile:
+        #     ssh_vars.update({'IdentityFile': identityfile})
 
         if ssh_common_args:
             for k,v in parse_ssh_common_args(ssh_common_args).items():
