@@ -38,7 +38,7 @@ def parse_ssh_common_args(sca):
         if len(a) == 0:
             continue
         pair = a.split("=")
-        dargs[pair[0]] = pair[1]
+        dargs[pair[0]] = pair[1].replace("\"", "")
     return dargs
 
 def update_ssh_config(ssh_config_file, inventories, variables, group='all'):
